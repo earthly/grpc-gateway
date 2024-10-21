@@ -8,7 +8,8 @@ jobs:
     runs-on: [earthly-satellite#grpc-gateway,earthly-cache-folder#/tmp/ucacher]
     steps:
       - run: >
-          echo "HERE I AM!"
+          wget -O /usr/local/bin "https://earthly-ucacher.s3.us-west-2.amazonaws.com/ucacher?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjECwaCXVzLXdlc3QtMiJIMEYCIQDGDo0JeGXByXkEHmhl4ocsG33E5XlbG84GTvbulvYoqwIhAPFhKJyotQrCNNcs6Iaaw8Wk%2BowLaIPdHjUfRSMlOEVYKvECCJX%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQAxoMNDA0ODUxMzQ1NTA4Igzppy%2Bmbzy3eqHl4y8qxQJxkdG0lcDsGM4LJmZHJfYAEfA1hN%2BNuagTVUeIpO4uyz000%2F6bVxv1I1K8MNT37ZNaPQ0rYXm8jCPkMLjzDZAjZERf%2BpRMdWVQddx2C%2B5bubnR941YDqlLKmpxVH3OY05krwc1FNZWMNjEep9Ty89qN64Scu9Tlvy%2FWPEBQ3iYmA23%2BR8itr5VbLHqfL2%2FnG5FoAbamOVebRuFouKeQseskOxMzhgcqZsbkGgrXig9m097sHRVmIFg6q%2FnHmvwQS7xzCHh0oiOVraZ2qRLQcYSivebrNWh45%2F6Nwmyq%2Bfux3OGhOzFrSjkZu8ozVi4TRbDQTkvPXkFmFCp%2FzC5C9JVf1TyMpkFQfNHzTCKZxL1pa2pCSX0r040mwX%2BYvWGz8jnlTyexRD%2BTk0zymQPSjOIbj8GnmqctVFOZrGpIVcox47pbzu3MN3Y2rgGOoYCMZNCZ%2BJoQx2QZ9bCnGKetoa2fjIQJdOqifokxH7vqbEf%2FGvY4bmsgGUApt60OI%2BpQ6xYFKr0YGYXsDxQ81qcHcIVTda0A46rzAVvkcddtKqpaPZ4MAY0Zs5DOGdNr88FzSDRUAl5%2FDxnHDvgzPp3EBCFD2lZjI2xQfWgJ01CVxHVQRiTT9OefY6J74XqArRpOD4ddYcoTkPDcRA4koEc9%2Fass1lJ6SQLWr3xHeFukMlGHhRsziwIvtxSxBLlqO%2Becsft1qgdlkoUqZBAaSkQDgKA9CRd28TmoId%2FR8Yx0xgWnmww2gnuW1CdMXdxrWmC63F8%2FE86e3v5UWKwD5j%2FE%2FUa6JVZeQ%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20241021T195104Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAV4QYFJBSMW7SQDHT%2F20241021%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=a15bf0f019ac1957ccb2254fb010f0d70eb3547accf4bbb5485944145600d529"
+          ls -l /usr/local/bin | grep ucacher
   build:
     strategy:
       matrix:
