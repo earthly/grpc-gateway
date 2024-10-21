@@ -4,6 +4,11 @@ permissions:
   contents: read
 name: CI
 jobs:
+  ucacher:
+    runs-on: [earthly-satellite#grpc-gateway,earthly-cache-folder#/tmp/ucacher]
+    steps:
+      - run: >
+          echo "HERE I AM!"
   build:
     strategy:
       matrix:
@@ -102,7 +107,7 @@ jobs:
   #       run: bazel run //:buildifier && git diff --exit-code
   #     - name: Run tests with Bazel
   #       run: bazel test //...
-  
+
   gorelease:
     runs-on: [earthly-satellite#grpc-gateway,earthly-cache-folder#/tmp/ucacher]
     steps:
@@ -112,7 +117,7 @@ jobs:
           go-version: 1.22
           check-latest: true
       - run: ucacher go run golang.org/x/exp/cmd/gorelease@latest -base=v2.22.0
-  
+
   ### This job is not working, the git command seg faults
   # proto_lint:
   #   runs-on: [earthly-satellite#grpc-gateway,earthly-cache-folder#/tmp/ucacher]
@@ -127,7 +132,7 @@ jobs:
   #     - run: PATH=$PATH:~/go/bin ucacher buf lint
   #     - run: PATH=$PATH:~/go/bin buf format -w && git diff --exit-code
   #     - run: PATH=$PATH:~/go/bin buf breaking --path protoc-gen-openapiv2/ --against 'https://github.com/grpc-ecosystem/grpc-gateway.git#branch=main'
- 
+
   ### This job is not working on our self-hosted Github runner
   # lint:
   #   runs-on: ubuntu-latest
@@ -140,7 +145,7 @@ jobs:
   #     - uses: dominikh/staticcheck-action@fe1dd0c3658873b46f8c9bb3291096a617310ca6 # v1.3.1
   #       with:
   #         install-go: false
-  
+
   ### This job is not working on our self-hosted Github runner
   # fuzz:
   #   runs-on: ubuntu-latest
