@@ -46,7 +46,7 @@ jobs:
           cd examples/internal/browser &&
           ucacher npm install gulp-cli &&
           ucacher npm install &&
-          ls -la ./node_modules &&
+          ls -la ./node_modules/.bin &&
           ucacher ./node_modules/.bin/gulp
 
   ### Note: This job runs in a container - ucacher is not supported yet in nested containers.
