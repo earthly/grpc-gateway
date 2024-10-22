@@ -15,7 +15,7 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
-      - run: wget -O /usr/bin/ucacher "https://earthly-ucacher.s3.us-west-2.amazonaws.com/ucacher?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDEaCXVzLXdlc3QtMiJGMEQCIHR1F8ZGuV8Ks0k0XAFfWaVtSU4LyYt15uc6mKHPU3wKAiATAM22TLcZlpOG3a1BWT1HOOYSusSfJ5ED3aZyc%2B2kwCrxAgia%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDQwNDg1MTM0NTUwOCIM6eUkwngrrgt67y3FKsUC8sTtudNsVMjbFLPse0LOoLhOGM6GZ5Nsrj2AEcj1IOh3k46y2pyAPBDAGwYMYWg8w%2B3e7jIShoZLB1XRjB4pBszF7KZi1cLpT86eZFxPE4tOkJN6pDvXsVPN2J5S8LgZ2uXpuK2cGGRHEX%2F5L64ALQikUO48m86dl8L3NzWY3%2BNrcB%2FheWq%2B7w5KHwctm%2BOt883rL6i2JCEnS1iC0qQJ3240f3%2B0wkKXXO8EA7AgBBjaiWEpBogPRQG4gGa4XvZt1KJl5PvMT4IFn4wsbFp7WL5cnFikIxdnWvtxJG0AyFFl2CNVPvtdfKWxb6lOkD%2B9p55CJASJ7jG3yKdoXZIJilep6ZDsuTAfSAES5dRgX26y%2BsDZBzxayDguOWER0JQ0URP%2BdgCHQ5breYDh3QEt0e8nYyUPqsHLgE17qGB%2BbgJ0LOatNTDn6tu4BjqIAlklNQV8%2B9NmH3v13YbQhq0wlEF0d8Uwcp6655CowFLx1kMy8Bvahl645TasNUjHWpLtYw7Jq0s%2FnchgJONTKXFzzHDL1VSrNzOEYADqgSBt45VMYoRvcmESOEcgtN1zqJacuUuv%2FUve%2BqORsP0fz7qi1n1XwTL8zRay3SHZ02vpMMLfqaFAL3EvQ2b5cxL9739ENqa6wCsgKkcMDwBEIY8NvQjmk1ToZwHCjb3c%2BPKzoWj88g9MVJe8JxGdGK1dpDswrctYVn9af1pUgJQIdDEyHGC8lSwN%2BDBEj7Sp5hOl3F0%2B9Ulivm%2FVP3%2FhcKn56dwV7j1VsFrrajx9xJLVTW1i2azsES38LQ%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20241022T005104Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAV4QYFJBSK4EN2COE%2F20241022%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=30798a23e16a924ac1d808152543c5dfcc846b81948fde4fe504ec114bccd74f"
+      - run: mv ./bin/ucacher /usr/bin/ucacher
       - run: chmod 755 /usr/bin/ucacher
       - run: LOG_LEVEL=debug UCACHER_INSTRUMENTER=seccomp ucacher go build ./...
   test:
@@ -26,7 +26,7 @@ jobs:
           go-version: 1.23
           check-latest: true
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
-      - run: wget -O /usr/bin/ucacher "https://earthly-ucacher.s3.us-west-2.amazonaws.com/ucacher?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDEaCXVzLXdlc3QtMiJGMEQCIHR1F8ZGuV8Ks0k0XAFfWaVtSU4LyYt15uc6mKHPU3wKAiATAM22TLcZlpOG3a1BWT1HOOYSusSfJ5ED3aZyc%2B2kwCrxAgia%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDQwNDg1MTM0NTUwOCIM6eUkwngrrgt67y3FKsUC8sTtudNsVMjbFLPse0LOoLhOGM6GZ5Nsrj2AEcj1IOh3k46y2pyAPBDAGwYMYWg8w%2B3e7jIShoZLB1XRjB4pBszF7KZi1cLpT86eZFxPE4tOkJN6pDvXsVPN2J5S8LgZ2uXpuK2cGGRHEX%2F5L64ALQikUO48m86dl8L3NzWY3%2BNrcB%2FheWq%2B7w5KHwctm%2BOt883rL6i2JCEnS1iC0qQJ3240f3%2B0wkKXXO8EA7AgBBjaiWEpBogPRQG4gGa4XvZt1KJl5PvMT4IFn4wsbFp7WL5cnFikIxdnWvtxJG0AyFFl2CNVPvtdfKWxb6lOkD%2B9p55CJASJ7jG3yKdoXZIJilep6ZDsuTAfSAES5dRgX26y%2BsDZBzxayDguOWER0JQ0URP%2BdgCHQ5breYDh3QEt0e8nYyUPqsHLgE17qGB%2BbgJ0LOatNTDn6tu4BjqIAlklNQV8%2B9NmH3v13YbQhq0wlEF0d8Uwcp6655CowFLx1kMy8Bvahl645TasNUjHWpLtYw7Jq0s%2FnchgJONTKXFzzHDL1VSrNzOEYADqgSBt45VMYoRvcmESOEcgtN1zqJacuUuv%2FUve%2BqORsP0fz7qi1n1XwTL8zRay3SHZ02vpMMLfqaFAL3EvQ2b5cxL9739ENqa6wCsgKkcMDwBEIY8NvQjmk1ToZwHCjb3c%2BPKzoWj88g9MVJe8JxGdGK1dpDswrctYVn9af1pUgJQIdDEyHGC8lSwN%2BDBEj7Sp5hOl3F0%2B9Ulivm%2FVP3%2FhcKn56dwV7j1VsFrrajx9xJLVTW1i2azsES38LQ%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20241022T005104Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAV4QYFJBSK4EN2COE%2F20241022%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=30798a23e16a924ac1d808152543c5dfcc846b81948fde4fe504ec114bccd74f"
+      - run: mv ./bin/ucacher /usr/bin/ucacher
       - run: chmod 755 /usr/bin/ucacher
       - run: LOG_LEVEL=debug UCACHER_INSTRUMENTER=seccomp ucacher go test ./...
   node_test:
@@ -40,7 +40,7 @@ jobs:
         with:
           go-version: 1.23
           check-latest: true
-      - run: wget -O /usr/bin/ucacher "https://earthly-ucacher.s3.us-west-2.amazonaws.com/ucacher?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDEaCXVzLXdlc3QtMiJGMEQCIHR1F8ZGuV8Ks0k0XAFfWaVtSU4LyYt15uc6mKHPU3wKAiATAM22TLcZlpOG3a1BWT1HOOYSusSfJ5ED3aZyc%2B2kwCrxAgia%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDQwNDg1MTM0NTUwOCIM6eUkwngrrgt67y3FKsUC8sTtudNsVMjbFLPse0LOoLhOGM6GZ5Nsrj2AEcj1IOh3k46y2pyAPBDAGwYMYWg8w%2B3e7jIShoZLB1XRjB4pBszF7KZi1cLpT86eZFxPE4tOkJN6pDvXsVPN2J5S8LgZ2uXpuK2cGGRHEX%2F5L64ALQikUO48m86dl8L3NzWY3%2BNrcB%2FheWq%2B7w5KHwctm%2BOt883rL6i2JCEnS1iC0qQJ3240f3%2B0wkKXXO8EA7AgBBjaiWEpBogPRQG4gGa4XvZt1KJl5PvMT4IFn4wsbFp7WL5cnFikIxdnWvtxJG0AyFFl2CNVPvtdfKWxb6lOkD%2B9p55CJASJ7jG3yKdoXZIJilep6ZDsuTAfSAES5dRgX26y%2BsDZBzxayDguOWER0JQ0URP%2BdgCHQ5breYDh3QEt0e8nYyUPqsHLgE17qGB%2BbgJ0LOatNTDn6tu4BjqIAlklNQV8%2B9NmH3v13YbQhq0wlEF0d8Uwcp6655CowFLx1kMy8Bvahl645TasNUjHWpLtYw7Jq0s%2FnchgJONTKXFzzHDL1VSrNzOEYADqgSBt45VMYoRvcmESOEcgtN1zqJacuUuv%2FUve%2BqORsP0fz7qi1n1XwTL8zRay3SHZ02vpMMLfqaFAL3EvQ2b5cxL9739ENqa6wCsgKkcMDwBEIY8NvQjmk1ToZwHCjb3c%2BPKzoWj88g9MVJe8JxGdGK1dpDswrctYVn9af1pUgJQIdDEyHGC8lSwN%2BDBEj7Sp5hOl3F0%2B9Ulivm%2FVP3%2FhcKn56dwV7j1VsFrrajx9xJLVTW1i2azsES38LQ%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20241022T005104Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAV4QYFJBSK4EN2COE%2F20241022%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=30798a23e16a924ac1d808152543c5dfcc846b81948fde4fe504ec114bccd74f"
+      - run: mv ./bin/ucacher /usr/bin/ucacher
       - run: chmod 755 /usr/bin/ucacher
       - run: >
           cd examples/internal/browser &&
@@ -117,7 +117,7 @@ jobs:
         with:
           go-version: 1.22
           check-latest: true
-      - run: wget -O /usr/bin/ucacher "https://earthly-ucacher.s3.us-west-2.amazonaws.com/ucacher?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDEaCXVzLXdlc3QtMiJGMEQCIHR1F8ZGuV8Ks0k0XAFfWaVtSU4LyYt15uc6mKHPU3wKAiATAM22TLcZlpOG3a1BWT1HOOYSusSfJ5ED3aZyc%2B2kwCrxAgia%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDQwNDg1MTM0NTUwOCIM6eUkwngrrgt67y3FKsUC8sTtudNsVMjbFLPse0LOoLhOGM6GZ5Nsrj2AEcj1IOh3k46y2pyAPBDAGwYMYWg8w%2B3e7jIShoZLB1XRjB4pBszF7KZi1cLpT86eZFxPE4tOkJN6pDvXsVPN2J5S8LgZ2uXpuK2cGGRHEX%2F5L64ALQikUO48m86dl8L3NzWY3%2BNrcB%2FheWq%2B7w5KHwctm%2BOt883rL6i2JCEnS1iC0qQJ3240f3%2B0wkKXXO8EA7AgBBjaiWEpBogPRQG4gGa4XvZt1KJl5PvMT4IFn4wsbFp7WL5cnFikIxdnWvtxJG0AyFFl2CNVPvtdfKWxb6lOkD%2B9p55CJASJ7jG3yKdoXZIJilep6ZDsuTAfSAES5dRgX26y%2BsDZBzxayDguOWER0JQ0URP%2BdgCHQ5breYDh3QEt0e8nYyUPqsHLgE17qGB%2BbgJ0LOatNTDn6tu4BjqIAlklNQV8%2B9NmH3v13YbQhq0wlEF0d8Uwcp6655CowFLx1kMy8Bvahl645TasNUjHWpLtYw7Jq0s%2FnchgJONTKXFzzHDL1VSrNzOEYADqgSBt45VMYoRvcmESOEcgtN1zqJacuUuv%2FUve%2BqORsP0fz7qi1n1XwTL8zRay3SHZ02vpMMLfqaFAL3EvQ2b5cxL9739ENqa6wCsgKkcMDwBEIY8NvQjmk1ToZwHCjb3c%2BPKzoWj88g9MVJe8JxGdGK1dpDswrctYVn9af1pUgJQIdDEyHGC8lSwN%2BDBEj7Sp5hOl3F0%2B9Ulivm%2FVP3%2FhcKn56dwV7j1VsFrrajx9xJLVTW1i2azsES38LQ%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20241022T005104Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAV4QYFJBSK4EN2COE%2F20241022%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=30798a23e16a924ac1d808152543c5dfcc846b81948fde4fe504ec114bccd74f"
+      - run: mv ./bin/ucacher /usr/bin/ucacher
       - run: chmod 755 /usr/bin/ucacher
       - run: UCACHER_INSTRUMENTER=seccomp ucacher go run golang.org/x/exp/cmd/gorelease@latest -base=v2.22.0
 
